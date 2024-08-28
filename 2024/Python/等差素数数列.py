@@ -27,42 +27,38 @@ class SolutionBase:
     def is_prime(n):
         return is_prime(n)
 
+    def find_next_prime(self, n):
+        """找到比 n 大的下一个素数"""
+        n += 1
+        while not self.is_prime(n):
+            n += 1
+        return n
+
 
 class SolutionMethod1(SolutionBase):
     """方法一：暴力枚举"""
-
-    def find_next_prime(self, n):
-        """找到比n大的下一个素数"""
-        n += 1
-        while True:
-            if self.is_prime(n):
-                return n
-            n += 1
 
     def arr_diff_equal(self, arr):
         """判断一个数组的差值是否相等"""
         if len(arr) < 2:
             return True
         diff = arr[1] - arr[0]
-        for i in range(1, len(arr)):
-            if arr[i] - arr[i - 1] != diff:
-                return False
-        return True
+        return all(arr[i] - arr[i - 1] == diff for i in range(1, len(arr)))
 
     def find_diff_prime(self, arr_length):
-        """找到一个长度为arr_length的等差素数数列"""
+        """找到一个长度为 arr_length 的等差素数数列"""
         i = 2
         while True:
             prime_arr = []
             diff = self.find_next_prime(i) - i
             for j in range(arr_length):
-                if self.is_prime(i + j * diff):
-                    prime_arr.append(i + j * diff)
+                candidate = i + j * diff
+                if self.is_prime(candidate):
+                    prime_arr.append(candidate)
 
-            if self.arr_diff_equal(prime_arr) and len(prime_arr) == arr_length:
+            if len(prime_arr) == arr_length and self.arr_diff_equal(prime_arr):
                 return diff, prime_arr
-            else:
-                i = self.find_next_prime(i)
+            i = self.find_next_prime(i)
 
 
 class SolutionMethod2(SolutionBase):
@@ -75,9 +71,7 @@ class SolutionMethod2(SolutionBase):
         """递归检查等差数列是否为素数"""
         if arr_length == 0:
             return True
-        if self.is_prime(num + step):
-            return self.loop_check(num + step, step, arr_length - 1)
-        return False
+        return self.is_prime(num + step) and self.loop_check(num + step, step, arr_length - 1)
 
     def find_out(self, arr_length):
         """找到等差数列的公差"""
@@ -90,16 +84,25 @@ class SolutionMethod2(SolutionBase):
 
 
 class SolutionMethod3(SolutionBase):
-    """方法三：等差数列的性质"""
+    """方法三：利用等差数列的性质优化解法"""
 
-    def find_out(self, arr_length):
-        """找到等差数列的公差"""
-        for step in range(2, 10000):
-            for n in range(2, 10000):
-                if not self.is_prime(n + step):
-                    break
-                if n == 9999:
-                    return step
+    def generate_primes(self, limit):
+        """生成所有小于 limit 的素数列表"""
+        return [num for num in range(2, limit) if self.is_prime(num)]
+
+    def find_arithmetic_prime_sequence(self, arr_length):
+        """找到长度为 arr_length 的等差素数数列及其公差"""
+        primes = self.generate_primes(arr_length)
+        step = 1
+        for prime in primes:
+            step *= prime
+
+        start = 2
+        while True:
+            sequence = [start + i * step for i in range(arr_length)]
+            if all(self.is_prime(num) for num in sequence):
+                return step, sequence
+            start = self.find_next_prime(start)
 
 
 def main():
@@ -121,7 +124,9 @@ def main():
         print(f"公差为：{sm2.find_out(arr_length)}")
     elif choice == '3':
         sm3 = SolutionMethod3()
-        print(f"公差为：{sm3.find_out(arr_length)}")
+        diff, prime_sequence = sm3.find_arithmetic_prime_sequence(arr_length)
+        print(f"公差为：{diff}")
+        print(f"等差素数数列为：{prime_sequence}")
     else:
         print("无效的选择，请重新运行程序并选择 1, 2 或 3")
 
