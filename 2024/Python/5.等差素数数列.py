@@ -80,7 +80,9 @@ class SolutionMethod1(SolutionBase):
 
 
 class SolutionMethod2(SolutionBase):
-    """方法二：递归检查法"""
+    """
+    方法二：递归检查法 (由转计算机交流群, 24数学刘家蔚同学提供)
+    """ 
 
     def loop_check(self, num, step, arr_length):
         """

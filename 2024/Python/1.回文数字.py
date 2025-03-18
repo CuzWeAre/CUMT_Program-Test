@@ -17,6 +17,7 @@
 
 
 def is_palindrome(num_str):
+    """判断一个字符串是否是回文数，非常常见题型，随便写一个能过的就好"""
     return num_str == num_str[::-1]
 
 
