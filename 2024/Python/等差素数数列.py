@@ -1,23 +1,27 @@
-def is_prime(num):
-    if num <= 1:
-        return False
-    for i in range(2, int(num**0.5) + 1):
-        if num % i == 0:
+# 由计算机转专业群，24数学刘家蔚同学提供
+
+def is_prime(n): #素数筛
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
             return False
     return True
-diff = 0 # 公差
-for i in range(2,1000):
-    if not is_prime(i):
+
+def loop_check(num,step,time): #本函数用于检测是否符合等差素数数列条件
+    if time == 0: #base case
+        return True
+    if is_prime(num+step):  #递归
+        return loop_check(num+step,step,time-1)
+    return False
+
+stop = 0 #状态值，0为继续，1为停止
+for n in range(2,10000):
+    if not is_prime(n):
         continue
-    else:
-        for j in range(1,501):
-            length = 0 # 记当前等差素数数列长度,同时每一次重新开始查找时重置为0
-            for k in range(i + j,i + j * 11,j):
-                if not is_prime(k):
-                    break
-                else:
-                    length += 1
-                if length == 9: # i是数列中第一个元素，我们检查时候是从i+j开始的
-                    diff = j
-                    break
-print(diff)
+    elif stop == 0:
+        for step in range(2,10000): #枚举等差，逐个尝试
+            if loop_check(n,step,8):
+                print(step)
+                stop = 1 #设置为停止
+                break
+    elif stop == 1:
+        break
