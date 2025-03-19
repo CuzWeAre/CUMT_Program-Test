@@ -14,3 +14,9 @@
 对于有志于进入计算机行业的同学，请在遇到问题时首先尝试检索信息自行解决。对于尝试过但仍难以解决的，请阅读《[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)》学会如何聪明的提问。  
 注意，没有人有义务无偿为你解决问题，请有别于中小学。绝大多数人乐意帮助解答疑惑，考虑到他们的付出和您的收获，如果提问时能保持基本礼貌会是个双赢局面。  
 欢迎志向转入计算机学院的同学加入CUMT转计算机交流群：866766652。  
+矿大转专业交流群831110233
+计算机资源分享群916483545
+https://pintia.cn/ 
+https://leetcode.cn/ 
+https://www.luogu.com.cn/ 
+https://programmercarl.com/ 
