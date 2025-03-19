@@ -16,7 +16,7 @@
 欢迎志向转入计算机学院的同学加入CUMT转计算机交流群：866766652。  
 矿大转专业交流群831110233
 计算机资源分享群916483545
-https://pintia.cn/ 
-https://leetcode.cn/ 
-https://www.luogu.com.cn/ 
-https://programmercarl.com/ 
+https://pintia.cn/
+https://leetcode.cn/
+https://www.luogu.com.cn/
+https://programmercarl.com/
