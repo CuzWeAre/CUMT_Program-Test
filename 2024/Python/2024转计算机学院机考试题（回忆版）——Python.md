@@ -271,7 +271,7 @@ for n in range(2,10000):
         continue
     elif stop == 0:
         for step in range(2,10000): #枚举等差，逐个尝试
-            if loop_check(n,step,8):
+            if loop_check(n,step,9):
                 print(step)
                 stop = 1 #设置为停止
                 break
